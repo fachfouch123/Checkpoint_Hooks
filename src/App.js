@@ -1,23 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import Addmovie from "./Components/addmovie";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{height:'100px',border:'1.5px solid lightgrey', alignItems:'center', justifyContent:'center',display:'flex'}}>
+      <span style={{display:'flex',border:'1.5px solid lightgrey'}}>MOFLIX : Welcome To Your Movie Library</span>
+      </div>
+      
+
+
+      <Addmovie/>
     </div>
   );
 }
