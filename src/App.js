@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import MovieFilter from "./Components/MovieFilter";
-import Filter from "./Components/Filter";
+import MovieList from "./Components/MovieList";
 import { useState } from "react";
 
 function App() {
@@ -14,7 +14,7 @@ function App() {
       
      {/* <Filter functionino={change}/> */}
 
-      <Filter />
+      <MovieList />
     </div>
   );
 }
