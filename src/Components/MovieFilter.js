@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import {useState} from "react"
+import React from 'react'
+import {useState,useEffect} from "react"
 import Card from './Card'
 import Filter from './Filter'
 
-function Addmovie (){
+function MovieFilter ({fetchMovieArray}){
 const [Movies,setMovies] = useState([]);
 const [filterName,setFilterName] = useState('');
 const [filterRating,setFilterRating] = useState('');
@@ -24,11 +24,19 @@ const clearHandler = (event) => {
     setFilterRating('');
 } 
 
-console.log(filterName);
-console.log(filterRating);
+// console.log(filterName);
+// console.log(filterRating);
 
 const submitHandler = (e) => {
     e.preventDefault()
+    // if ((e.target.title.value=== '' || e.target.description.value=== '' || e.target.posterURL.value=== '' || e.target.rating.value=== '')  )
+    // {
+    //     window.confirm("you should fill all the boxes to add your movie")
+    //     e.target.title.value='';
+    //     e.target.rating.value='';
+    //     e.target.description.value='';
+    //     e.target.posterURL.value='';
+    // }else{
     const newMovie = {
         title:          e.target.title.value,
         description:    e.target.description.value,
@@ -36,18 +44,40 @@ const submitHandler = (e) => {
         rating:         e.target.rating.value
     }
     addMovie(newMovie);
-    e.target.title.value='';
-    e.target.description.value='';
-    e.target.posterURL.value='';
-    e.target.rating.value='';
+    // e.target.title.value='';
+    // e.target.description.value='';
+    // e.target.posterURL.value='';
+    // e.target.rating.value='';
 }
+let a=0;
+
+// const submitHandler = (e) => {
+//     e.preventDefault()
+//     // const Movies = [1,2];
+//     setMovies([[2,1]]);
+//     Movies.map((v,i) => (console.log(v)));
+
+
+
+//     a++;
+// }
+
+// useEffect(()=>{
+//     console.log("hallo");
+//     window.addEventListener('submit',submitHandler);
+//     return()=>{
+//         console.log("by by")
+//         window.removeEventListener('submit',submitHandler)
+//     }
+// },[Movies])
+
 
 return (
 
     <div style={{display: 'flex',maxWidth: '100%',}}>
         
         <div>
-        <form onSubmit={submitHandler} style={{width:'150px',border:'1.5px solid lightgrey'}}>
+        <form id="de" onSubmit={submitHandler} style={{width:'150px',border:'1.5px solid lightgrey'}}>
             <input type='text' name='title' placeholder='Film title'/>
             <input type="text" name='description' placeholder='Film description'/>
             <input type="text" name='posterURL' placeholder='Film URL'/>
@@ -69,7 +99,7 @@ return (
             justifyContent:'flex-start',flexWrap: 'wrap',border:'1.5px solid lightgrey'}}>
             {/* <Filter data={Movies}/> */}
             {   
-                Movies.filter((v,i)=>((v.title===filterName || v.rating===filterRating||(v.title===filterName && v.rating===filterRating)))).map((value, index) => 
+                Movies.filter((v,i)=>(((v.title===filterName || v.rating===filterRating || (filterRating==='' && filterName===''))))).map((value, index) => 
                 (<Card>
                 <span key={index}>
                     <p>title : {value.title}</p>
@@ -77,14 +107,18 @@ return (
                     <p>posterURL : {value.posterURL}</p>
                     <p>rating : {value.rating}</p>
                     <p>Movie index : {index}</p>
+                    {/* <p>v.title : {filterName}</p> */}
                 </span>
                 </Card>))
             }
         </div>
+        {fetchMovieArray(Movies)}
     </div>
+                    //    <div> {fetchMovieArray(Movies)}</div>
+
 
 )
 
 }
 
-export default Addmovie
+export default MovieFilter
